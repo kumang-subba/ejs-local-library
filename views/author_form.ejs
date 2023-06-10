@@ -1,0 +1,26 @@
+<%- include('header'); -%>
+<h1><%= title %></h1>
+<form action="" method="post">
+    <div class="form-group">
+        <label for="first_name"><strong>First Name:</strong></label>
+        <input type="text" id="first_name" class="form-control" placeholder="First name" name="first_name" value="<%= locals.author  ? author.first_name : '' %>" required="true" />
+        <label for="family_name"><strong>Family Name:</strong></label>
+        <input type="text" id="family_name" class="form-control" placeholder="Family name" name="family_name" value="<%= locals.author  ? author.family_name : '' %>" required="true" />
+        <div class="form-group">
+            <label for="date_of_birth"><strong>Date of birth:</strong></label>
+            <input type="date" id="date_of_birth" class="form-control" name="date_of_birth" value="<%= locals.author  ? author.dobForForm : '' %>" />
+            <label for="date_of_death"><strong>Date of death:</strong></label>
+            <input type="date" id="date_of_death" class="form-control" name="date_of_death" value="<%= locals.author  ? author.dodForForm : '' %>" />
+
+        </div>
+        <button class="btn btn-primary mt-2" type="submit">Submit</button>
+    </div>
+</form>
+<% if (locals.errors) { %>
+    <ul>
+        <% errors.forEach(function(error){ %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+<%- include('footer'); -%>

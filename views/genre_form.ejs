@@ -1,0 +1,17 @@
+<%- include('header'); -%>
+<h1><%= title %></h1>
+<form action="" method="post">
+    <div class="form-group">
+        <label for="name"><strong>Genre:</strong></label>
+        <input type="text" id="name" class="form-control" placeholder="Fantasy, Poetry etc." name="name" value="<%= locals.genre  ? genre.name : '' %>" required="true" />
+        <button class="btn btn-primary mt-2" type="submit">Submit</button>
+    </div>
+</form>
+<% if (locals.errors) { %>
+    <ul>
+        <% errors.forEach(function(error){ %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+<%- include('footer'); -%>

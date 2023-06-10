@@ -1,0 +1,38 @@
+<%- include('header'); -%>
+<h1><%= title %></h1>
+<form action="" method="post">
+    <div class="form-group">
+        <label for="book"><strong>Book:</strong></label>
+        <select type="select" id="book" class="form-control" placeholder="Select book" name="book" required="true"  >
+            <%  book_list.sort(function(a,b){let textA= a.title.toUpperCase();let textB= b.title.toUpperCase();return (textA < textB) ? -1 : (textA> textB)? 1:0;}).forEach(function(book){ %>
+                    <option value="<%= book._id %>" <%= locals.selected_book ? selected_book == book._id.toString() ? 'selected' : '' : '' %> ><%= book.title %></option>
+            <% }) %>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="imprint"><strong>Imprint:</strong></label>
+        <input type="text" id="imprint" placeholder="Publisher and date information" class="form-control" name="imprint" value="<%= locals.bookinstance  ? bookinstance.imprint : '' %>" required="true"/>
+    </div>
+    <div class="form-group">
+        <label for="due_back"><strong>Date when book available:</strong></label>
+        <input type="date" id="due_back" class="form-control" name="due_back" value=<%= locals.bookinstance  ? bookinstance.dateForForm : '' %> required/>
+    </div>
+    <div class="form-group">
+        <label for="status"><strong>Status:</strong></label>
+        <select type="select" id="status" class="form-control" placeholder="Select status" name="status" required="true" >
+            <option value="Maintenance" <%= locals.bookinstance ? bookinstance.status == "Maintenance" ? 'selected' : '' : '' %>>Maintenance</option>
+            <option value="Available" <%= locals.bookinstance ? bookinstance.status == "Available" ? 'selected' : '' : '' %>>Available</option>
+            <option value="Loaned" <%= locals.bookinstance ? bookinstance.status == "Loaned" ? 'selected' : '' : '' %>>Loaned</option>
+            <option value="Reserved" <%= locals.bookinstance ? bookinstance.status == "Reserved" ? 'selected' : '' : '' %>>Reserved</option>
+        </select>
+    </div>
+    <button class="btn btn-primary mt-2" type="submit">Submit</button>
+</form>
+<% if (locals.errors) { %>
+    <ul>
+        <% errors.forEach(function(error){ %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+<%- include('footer'); -%>

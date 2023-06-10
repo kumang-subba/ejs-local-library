@@ -1,0 +1,23 @@
+<%- include('header'); -%>
+<h1><strong><%= title %></strong></h1>
+<p><strong>ID: </strong><%= bookInstance._id %></p>
+<p><strong>Title:</strong> <%= bookInstance.book.title %></p>
+<p><strong>Imprint:</strong> <%= bookInstance.imprint %></p>
+<p>
+    <strong>Status: </strong>
+    <% if (bookInstance.status == "Available") { %>
+        <span class="text-success"><%= bookInstance.status %></span>
+    <% } else if (bookInstance.status == "Maintenance") { %>
+        <span class="text-danger"><%= bookInstance.status %></span>
+    <% } else { %>
+        <span class="text-warning"><%= bookInstance.status %></span>
+    <% } %>
+</p>
+<p>Do you really want to delete this Book Instance?</p>
+<form action="" method="post">
+    <div class="form-group">
+        <input type="hidden" id="bookInstanceId" class="form-control" name="bookInstanceId" required value="<%= bookInstance._id %>">
+    </div>
+    <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+<%- include('footer'); -%>
